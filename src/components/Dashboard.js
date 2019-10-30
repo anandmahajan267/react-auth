@@ -36,7 +36,7 @@ export default function ButtonAppBar() {
       <main>
         {/* Hero unit */}
         <div className={classes.heroContent}>
-          <Container maxWidth="sm">
+          <Container maxWidth="md">
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
               Welcome Guest to React Auth App
             </Typography>
