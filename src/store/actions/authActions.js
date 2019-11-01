@@ -14,30 +14,25 @@ export const registerUser = (newUser) => {
             body: JSON.stringify(newUser)
         }).then(res => res.json())
             .then(res => {
-                console.log(res)
                 if (res.success) {
-                    console.log(res.data)
                     dispatch({
                         type: REGISTER_SUCCESS, payload: {
                             signupSuccess: true,
                             isLoading: false
                         }
                     })
-                    // history.push('/')
                 }
                 else {
                     dispatch({ type: REGISTER_FAIL, payload: res.message })
                 }
             })
             .catch(err => {
-                console.log(err)
                 dispatch({ type: REGISTER_FAIL, payload: "Looks like server is down, Please try later" })
             })
     }
 }
 
 export const authUser = (userDetails) => {
-    console.log('userDetails :', userDetails)
     return dispatch => {
         dispatch({ type: START_LOADING })
         fetch('http://localhost:3000/api/auth/login', {
@@ -49,13 +44,11 @@ export const authUser = (userDetails) => {
             body: JSON.stringify(userDetails)
         }).then(res => res.json())
             .then(res => {
-                console.log(res)
                 if (res.success) {
                     const payload = {
                         token: res.token,
                         user: res.data
                     }
-                    console.log('payload', payload)
                     dispatch({
                         type: LOGIN_SUCCESS, payload: payload
                     })
@@ -66,7 +59,6 @@ export const authUser = (userDetails) => {
                 }
             })
             .catch(err => {
-                console.log(err)
                 dispatch({ type: LOGIN_FAIL, payload: "Looks like server is down, Please try later" })
             })
     }

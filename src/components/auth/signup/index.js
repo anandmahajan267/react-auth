@@ -47,7 +47,6 @@ const Signup = ({ handleRegisterUser, handleClearError, handleResetSignupSuccess
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     useEffect(() => {
-        console.log('colors : ', colors)
         error && handleClearError();
         handleResetSignupSuccess();
     }, []);
@@ -55,7 +54,6 @@ const Signup = ({ handleRegisterUser, handleClearError, handleResetSignupSuccess
         e.preventDefault()
         error && handleClearError();
         const userDetails = { first_name, last_name, email, password }
-        console.log('userDetails : ', userDetails)
         handleRegisterUser(userDetails)
     }
     return (
