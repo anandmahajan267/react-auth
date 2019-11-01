@@ -5,13 +5,19 @@
   "dependencies": {
     "@material-ui/core": "^4.5.2",
     "@material-ui/icons": "^4.5.1",
+    "axios": "^0.19.0",
+    "concurrently": "^5.0.0",
+    "history": "^4.10.1",
     "markdown-to-jsx": "^6.10.3",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.2.0",
-    "redux": "^4.0.4"
+    "redux": "^4.0.4",
+    "redux-form": "^8.2.6",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -27,7 +33,9 @@
     "webpack-dev-server": "^3.9.0"
   },
   "scripts": {
-    "start": "webpack-dev-server --mode development",
+    "start": "concurrently --kill-others \"npm run dev-client\" \"npm run dev-server\" ",
+    "dev-client": "webpack-dev-server --mode development",
+    "dev-server": "cd server && nodemon server.js",
     "build": "webpack --mode development"
   },
   "eslintConfig": {

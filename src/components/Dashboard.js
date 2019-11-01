@@ -1,8 +1,6 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-
+import { makeStyles, Typography, Container } from '@material-ui/core';
+import { connect } from "react-redux";
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -26,9 +24,11 @@ const useStyles = makeStyles(theme => ({
 
 
 }));
-export default function ButtonAppBar() {
-  const classes = useStyles();
 
+
+const Dashboard = ({ user, isLoggedIn }) => {
+  const classes = useStyles();
+  const welcomeName = (user && isLoggedIn && user.first_name)? `${user.first_name} ${user.last_name}` : 'Guest';
   return (
     <div >
 
@@ -37,8 +37,8 @@ export default function ButtonAppBar() {
         {/* Hero unit */}
         <div className={classes.heroContent}>
           <Container maxWidth="md">
-            <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-              Welcome Guest to React Auth App
+            <Typography component="h4" variant="h4" align="center" color="textPrimary" gutterBottom>
+              Welcome {welcomeName} to React Auth App
             </Typography>
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
               Lorem Ipsum is simply dummy text of the printing and typesetting industry.
@@ -57,3 +57,13 @@ export default function ButtonAppBar() {
     </div>
   );
 }
+
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.auth.user,
+    isLoggedIn: state.auth.isLoggedIn
+  }
+}
+
+export default connect(mapStateToProps)(Dashboard)
